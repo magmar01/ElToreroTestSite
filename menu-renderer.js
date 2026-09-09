@@ -64,35 +64,44 @@
       target.append(column);
     });
 
-    // Measure each section at its real desktop width before assigning it.
-    // This lets the layout treat the sections like movable blocks rather than
-    // simply filling one column after the other.
+    // First measure every section at the real desktop column width. Section
+    // heights are independent, so we can then find a near-optimal partition
+    // instead of greedily filling the currently shorter column. This greatly
+    // reduces the empty area at the bottom of one column.
     sections.forEach(section => columns[0].append(section));
-    const measured = sections.map((section, index) => ({
-      section,
-      index,
-      height: section.getBoundingClientRect().height + parseFloat(getComputedStyle(section).marginBottom || '0')
-    }));
+    const heights = sections.map(section => section.getBoundingClientRect().height);
+    const total = heights.reduce((sum, height) => sum + height, 0);
+    const targetHeight = total / 2;
 
-    // Largest-first balancing produces a much tighter pair of columns than
-    // sequential/greedy placement. It is desktop-only; mobile keeps MENU order.
-    measured.sort((a, b) => b.height - a.height);
-
-    const columnHeights = [0, 0];
-    const assignments = [[], []];
-
-    measured.forEach(entry => {
-      const columnIndex = columnHeights[0] <= columnHeights[1] ? 0 : 1;
-      assignments[columnIndex].push(entry);
-      columnHeights[columnIndex] += entry.height;
+    // Dynamic programming finds the subset whose total height is closest to
+    // half of the menu. The original section order is retained inside each
+    // resulting column, and this is desktop-only; mobile remains sequential.
+    const reachable = new Map([[0, []]]);
+    sections.forEach((section, index) => {
+      const height = heights[index];
+      const entries = Array.from(reachable.entries());
+      entries.forEach(([sum, indexes]) => {
+        const nextSum = sum + height;
+        if (nextSum <= targetHeight && !reachable.has(nextSum)) {
+          reachable.set(nextSum, [...indexes, index]);
+        }
+      });
     });
 
-    // Restore each column to the original MENU order so the categories remain
-    // predictable while still benefiting from the improved section grouping.
-    assignments.forEach(column => column.sort((a, b) => a.index - b.index));
+    let bestSum = 0;
+    reachable.forEach((indexes, sum) => {
+      if (sum > bestSum) bestSum = sum;
+    });
 
-    columns[0].replaceChildren(...assignments[0].map(entry => entry.section));
-    columns[1].replaceChildren(...assignments[1].map(entry => entry.section));
+    const firstColumnIndexes = new Set(reachable.get(bestSum) || []);
+    const firstColumn = [];
+    const secondColumn = [];
+    sections.forEach((section, index) => {
+      (firstColumnIndexes.has(index) ? firstColumn : secondColumn).push(section);
+    });
+
+    columns[0].replaceChildren(...firstColumn);
+    columns[1].replaceChildren(...secondColumn);
   };
 
   const renderMobileSequential = (target, sections) => {
@@ -103,14 +112,23 @@
     target.append(column);
   };
 
-  const renderMenu = () => {
+  const renderMenu = async () => {
     const target = document.querySelector('[data-menu]');
     if (!target || typeof MENU === 'undefined') return;
+
+    const desktop = window.matchMedia('(min-width: 901px)').matches;
+
+    // The balancing calculation depends on the actual Josefin Sans/Rye/etc.
+    // font metrics. Wait for web fonts so the measured section heights match
+    // the heights users actually see after the fonts finish loading.
+    if (desktop && document.fonts?.ready) {
+      await document.fonts.ready;
+    }
 
     target.replaceChildren();
     const sections = MENU.map((sectionData, index) => createMenuSection(sectionData, index));
 
-    if (window.matchMedia('(min-width: 901px)').matches) {
+    if (desktop) {
       renderDesktopBalanced(target, sections);
     } else {
       renderMobileSequential(target, sections);
