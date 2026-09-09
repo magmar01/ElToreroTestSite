@@ -59,10 +59,29 @@
   const buildMenuCategoryLinks = () => {
     if (!menuContainer || !Array.isArray(window.MENU) || !menuTrigger) return;
 
+    nav.querySelector('.menu-category-list')?.remove();
+
     const menuList = document.createElement('div');
     menuList.className = 'menu-category-list';
 
-    window.MENU.forEach((section, index) => {
+    let sections = window.MENU.map((section, index) => ({ section, index }));
+
+    // On desktop, mirror the actual balanced column order so the hamburger
+    // categories follow the reorganized desktop menu. Mobile keeps MENU order.
+    if (window.matchMedia('(min-width: 901px)').matches) {
+      const columns = [...menuContainer.querySelectorAll('.menu-column')];
+      const orderedIds = columns.flatMap(column =>
+        [...column.querySelectorAll(':scope > .menu-block')].map(block => block.id)
+      );
+      const ordered = orderedIds
+        .map(id => Number(id.replace('menu-section-', '')) - 1)
+        .filter(index => Number.isInteger(index) && index >= 0 && index < window.MENU.length);
+      if (ordered.length === window.MENU.length) {
+        sections = ordered.map(index => ({ section: window.MENU[index], index }));
+      }
+    }
+
+    sections.forEach(({ section, index }) => {
       const link = document.createElement('a');
       link.href = `#menu-section-${index + 1}`;
       link.textContent = section.title;
@@ -75,6 +94,8 @@
 
   if (typeof MENU !== 'undefined') window.MENU = MENU;
   buildMenuCategoryLinks();
+
+  menuContainer?.addEventListener('menu-layout-updated', buildMenuCategoryLinks);
 
   const structuredData = {
     '@context': 'https://schema.org',
