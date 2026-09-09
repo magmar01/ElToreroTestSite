@@ -7,30 +7,23 @@
   <title>El Torero Mexican Restaurant</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bree+Serif&family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@600;700&family=Josefin+Sans:wght@400;500;600&family=Lora:wght@600;700&family=Playfair+Display:wght@600;700&family=Rye&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bree+Serif&family=Cinzel:wght@600;700&family=DM+Serif+Display:ital@0;1&family=Josefin+Sans:wght@400;500;600&family=Lobster&family=Oswald:wght@500;600;700&family=Rye&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip-link" href="#menu">Skip to menu</a>
-
   <header class="site-header" id="home">
     <div class="navigation">
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
-        <span></span><span></span><span></span>
-      </button>
-
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><span></span><span></span><span></span></button>
       <nav class="site-nav" id="site-nav" aria-label="Main navigation">
         <a href="#home">Home</a>
         <button class="menu-nav-trigger" type="button" data-menu-trigger aria-expanded="false">Menu <span aria-hidden="true">▾</span></button>
-        <a href="#hours">Hours</a>
-        <a href="#contact">Contact</a>
-        <a href="#location">Location</a>
+        <a href="#hours">Hours</a><a href="#contact">Contact</a><a href="#location">Location</a>
         <button class="menu-close" type="button" aria-label="Close navigation">×</button>
       </nav>
     </div>
     <div class="hero-caption">Mexican Comfort Food</div>
   </header>
-
   <main>
     <section class="menu-section" id="menu" aria-labelledby="menu-title">
       <h1 id="menu-title">Menu</h1>
@@ -40,45 +33,23 @@
         <div class="font-option font-rye"><span>OPTION 2</span><strong>APPETIZERS</strong></div>
         <div class="font-option font-alfa"><span>OPTION 3</span><strong>APPETIZERS</strong></div>
         <div class="font-option font-cinzel"><span>OPTION 4</span><strong>APPETIZERS</strong></div>
-        <div class="font-option font-playfair"><span>OPTION 5</span><strong>APPETIZERS</strong></div>
-        <div class="font-option font-cormorant"><span>OPTION 6</span><strong>APPETIZERS</strong></div>
-        <div class="font-option font-lora"><span>OPTION 7</span><strong>APPETIZERS</strong></div>
-        <div class="font-option font-georgia"><span>OPTION 8</span><strong>APPETIZERS</strong></div>
+        <div class="font-option font-lobster"><span>OPTION 5</span><strong>APPETIZERS</strong></div>
+        <div class="font-option font-oswald"><span>OPTION 6</span><strong>APPETIZERS</strong></div>
+        <div class="font-option font-dmserif"><span>OPTION 7</span><strong>APPETIZERS</strong></div>
+        <div class="font-option font-cinzel-light"><span>OPTION 8</span><strong>APPETIZERS</strong></div>
       </div>
       <div class="menu-grid" data-menu></div>
     </section>
-
     <section class="hours-section" id="hours" aria-labelledby="hours-title">
-      <h1 id="hours-title">Hours</h1>
-      <div class="menu-line" aria-hidden="true"></div>
-      <div class="hours-grid">
-        <strong>Sunday</strong><span>Closed</span>
-        <strong>Monday–Saturday</strong><span>11am–9pm</span>
-      </div>
+      <h1 id="hours-title">Hours</h1><div class="menu-line" aria-hidden="true"></div>
+      <div class="hours-grid"><strong>Sunday</strong><span>Closed</span><strong>Monday–Saturday</strong><span>11am–9pm</span></div>
     </section>
   </main>
-
   <footer class="site-footer">
-    <section class="contact-section" id="contact" aria-labelledby="contact-title">
-      <h1 id="contact-title">Contact</h1>
-      <p>3656 Satellite Boulevard, Duluth, GA 30043</p>
-      <p><a href="tel:+17704764320">(770) 476-4320</a></p>
-      <p>Fax: (770) 476-9683</p>
-      <p><a href="mailto:ElToreroDuluth@gmail.com">ElToreroDuluth@gmail.com</a></p>
-    </section>
-
-    <section class="location-section" id="location" aria-labelledby="location-title">
-      <h1 id="location-title">Location</h1>
-      <div class="map-wrap">
-        <iframe title="El Torero Mexican Restaurant location" src="https://www.google.com/maps?q=3656+Satellite+Boulevard,+Duluth,+GA+30043&output=embed" loading="lazy"></iframe>
-      </div>
-    </section>
-
+    <section class="contact-section" id="contact" aria-labelledby="contact-title"><h1 id="contact-title">Contact</h1><p>3656 Satellite Boulevard, Duluth, GA 30043</p><p><a href="tel:+17704764320">(770) 476-4320</a></p><p>Fax: (770) 476-9683</p><p><a href="mailto:ElToreroDuluth@gmail.com">ElToreroDuluth@gmail.com</a></p></section>
+    <section class="location-section" id="location" aria-labelledby="location-title"><h1 id="location-title">Location</h1><div class="map-wrap"><iframe title="El Torero Mexican Restaurant location" src="https://www.google.com/maps?q=3656+Satellite+Boulevard,+Duluth,+GA+30043&output=embed" loading="lazy"></iframe></div></section>
     <p class="copyright">© El Torero Mexican Restaurant</p>
   </footer>
-
-  <script src="menu.js" defer></script>
-  <script src="menu-renderer.js" defer></script>
-  <script src="site.js" defer></script>
+  <script src="menu.js" defer></script><script src="menu-renderer.js" defer></script><script src="site.js" defer></script>
 </body>
 </html>
