@@ -11,7 +11,12 @@
     const item = document.createElement('li');
     item.className = 'menu-item';
 
-    item.append(createTextElement('span', 'menu-name', itemData.name));
+    const main = document.createElement('div');
+    main.className = 'menu-main';
+    main.append(createTextElement('span', 'menu-name', itemData.name));
+    main.append(document.createElement('span')).className = 'menu-dots';
+
+    item.append(main);
     item.append(createTextElement('span', 'menu-price', itemData.price));
 
     if (itemData.description) {
