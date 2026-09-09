@@ -41,16 +41,22 @@
     const link = event.target.closest('a');
     if (!link) return;
 
-    // Menu category links scroll to their section without adding a hash
-    // fragment to the GitHub Pages URL.
+    // Menu category links scroll to their section without ever putting a
+    // #menu-section-N fragment into the GitHub Pages URL.
     if (link.classList.contains('menu-category-link')) {
       event.preventDefault();
-      const target = document.querySelector(link.hash);
+      const targetSelector = link.dataset.target;
+      const target = targetSelector ? document.querySelector(targetSelector) : null;
       setOpen(false);
+
       if (target) {
-        requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        requestAnimationFrame(() => {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        });
+      } else {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
       }
-      history.replaceState(null, '', window.location.pathname + window.location.search);
       return;
     }
 
@@ -97,7 +103,10 @@
 
     sections.forEach(({ section, index }) => {
       const link = document.createElement('a');
-      link.href = `#menu-section-${index + 1}`;
+      // Use the page URL itself as the fallback href so even if JavaScript
+      // fails or an old cached script is served, no hash fragment is added.
+      link.href = window.location.pathname + window.location.search;
+      link.dataset.target = `#menu-section-${index + 1}`;
       link.textContent = section.title;
       link.className = 'menu-category-link';
       menuList.append(link);
