@@ -1,0 +1,46 @@
+/* Robust menu name / dot / price layout.
+   Keeps dots tight to normal names and lets long names wrap without creating large gaps. */
+.menu-item{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) max-content;
+  grid-template-rows:auto auto;
+  align-items:baseline;
+}
+.menu-item::before{display:none!important}
+.menu-main{
+  grid-column:1;
+  grid-row:1;
+  display:flex;
+  align-items:baseline;
+  min-width:0;
+}
+.menu-name{
+  flex:0 1 auto;
+  min-width:0;
+  max-width:none!important;
+  padding-right:2px;
+  overflow-wrap:anywhere;
+}
+.menu-dots{
+  flex:1 1 20px;
+  min-width:14px;
+  margin:0 4px;
+  border-bottom:2px dotted #222;
+  align-self:center;
+}
+.menu-price{
+  grid-column:2;
+  grid-row:1;
+  padding-left:2px;
+  white-space:nowrap;
+}
+.menu-desc{
+  grid-column:1/-1;
+  grid-row:2;
+}
+@media(max-width:900px){
+  .menu-dots{min-width:12px;margin-left:3px;margin-right:3px;border-bottom-width:1.5px}
+}
+@media(max-width:420px){
+  .menu-dots{min-width:10px}
+}
