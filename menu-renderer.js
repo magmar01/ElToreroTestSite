@@ -30,6 +30,10 @@
     section.className = 'menu-block';
     section.id = `menu-section-${index + 1}`;
 
+    if (sectionData.title === 'Special Orders') {
+      section.classList.add('menu-block--special-orders');
+    }
+
     section.append(createTextElement('h2', 'menu-heading', sectionData.title));
 
     if (sectionData.note) {
@@ -52,11 +56,25 @@
     const columns = [document.createElement('div'), document.createElement('div')];
     columns.forEach(column => column.className = 'menu-column');
     const split = Math.ceil(MENU.length / 2);
+    let specialOrders = null;
 
     MENU.forEach((sectionData, index) => {
+      const section = createMenuSection(sectionData, index);
+
+      // Keep Special Orders as the final block in the right column on desktop.
+      // On mobile the existing one-column flow remains intact.
+      if (sectionData.title === 'Special Orders') {
+        specialOrders = section;
+        return;
+      }
+
       const columnIndex = index < split ? 0 : 1;
-      columns[columnIndex].append(createMenuSection(sectionData, index));
+      columns[columnIndex].append(section);
     });
+
+    if (specialOrders) {
+      columns[1].append(specialOrders);
+    }
 
     columns.forEach(column => target.append(column));
   };
