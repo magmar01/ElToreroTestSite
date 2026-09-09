@@ -17,6 +17,22 @@ body { margin: 0; background: var(--color-white); color: var(--color-black); ove
 button, a { font: inherit; }
 a { color: inherit; }
 
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  padding: 8px 12px;
+  background: var(--color-white);
+  color: var(--color-red);
+  font-family: 'Josefin Sans', Arial, sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-150%);
+  transition: transform .2s ease;
+}
+.skip-link:focus { transform: translateY(0); }
+
 /* ---------------- Header ---------------- */
 .site-header {
   position: relative;
@@ -311,5 +327,5 @@ a { color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .site-nav, .menu-toggle span { transition: none; }
+  .site-nav, .menu-toggle span, .skip-link { transition: none; }
 }
