@@ -15,6 +15,10 @@
     toggle.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+    if (!open) {
+      nav.classList.remove('menu-expanded');
+      menuTrigger?.setAttribute('aria-expanded', 'false');
+    }
 
     if (open) {
       returnFocus = document.activeElement;
@@ -37,8 +41,6 @@
     const link = event.target.closest('a');
     if (!link) return;
     setOpen(false);
-    nav.classList.remove('menu-expanded');
-    menuTrigger?.setAttribute('aria-expanded', 'false');
   });
 
   document.addEventListener('click', event => {
@@ -54,7 +56,6 @@
   });
 
   // Build the Menu category list from the same MENU data used to render the page.
-  // This keeps navigation automatically in sync when menu sections are added or renamed.
   const buildMenuCategoryLinks = () => {
     if (!menuContainer || !Array.isArray(window.MENU) || !menuTrigger) return;
 
