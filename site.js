@@ -5,24 +5,41 @@
   const close = document.querySelector('.menu-close');
   if (!toggle || !nav) return;
 
+  const firstLink = nav.querySelector('a');
+  let returnFocus = null;
+
   const setOpen = open => {
     nav.classList.toggle('is-open', open);
     toggle.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+
+    if (open) {
+      returnFocus = document.activeElement;
+      requestAnimationFrame(() => firstLink?.focus());
+    } else if (returnFocus instanceof HTMLElement) {
+      requestAnimationFrame(() => returnFocus.focus());
+      returnFocus = null;
+    }
   };
 
   toggle.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
   close?.addEventListener('click', () => setOpen(false));
+
   nav.addEventListener('click', event => {
     if (event.target.closest('a')) setOpen(false);
   });
+
   document.addEventListener('click', event => {
     if (!nav.classList.contains('is-open')) return;
     if (!nav.contains(event.target) && !toggle.contains(event.target)) setOpen(false);
   });
+
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') setOpen(false);
+    if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+      event.preventDefault();
+      setOpen(false);
+    }
   });
 
   const structuredData = {
