@@ -99,7 +99,7 @@ a { color: inherit; }
   .menu-column h2 { margin: 18px 0 16px; padding-bottom: 6px; font-size: clamp(1.55rem, 5vw, 2rem); }
   .menu-column h2::after { width: 78%; margin-top: 8px; }
   .menu-note { margin-top: -4px; }
-  .menu-item { grid-template-columns: minmax(0, 1fr) minmax(12px, 1fr) max-content; padding: 7px 0 12px; }
+  .menu-item { grid-template-columns: minmax(0, auto) minmax(12px, 1fr) max-content; padding: 7px 0 12px; }
   .menu-name, .menu-price { font-size: clamp(.9rem, 3.5vw, 1.05rem); }
   .menu-desc, .menu-note { font-size: clamp(.74rem, 2.6vw, .9rem); }
   .hours-section { padding: 26px 5% 50px; }
