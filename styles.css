@@ -64,10 +64,11 @@ a { color: inherit; }
 .font-option { display: flex; align-items: baseline; justify-content: center; gap: 18px; padding: 8px 0; color: var(--color-red); }
 .font-option span { width: 90px; color: #666; font-family: 'Josefin Sans', sans-serif; font-size: .72rem; font-weight: 600; letter-spacing: .06em; }
 .font-option strong { font-size: 2rem; font-weight: 600; line-height: 1; }
-.font-bree strong { font-family: 'Bree Serif', serif; }
-.font-rye strong { font-family: 'Rye', serif; }
-.font-alfa strong { font-family: 'Alfa Slab One', serif; }
-.font-cinzel strong { font-family: 'Cinzel', serif; letter-spacing: .04em; }
+/* These preview fallbacks are intentionally different system fonts so the choices remain visible even when external web fonts are blocked. */
+.font-bree strong { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; }
+.font-rye strong { font-family: Impact, 'Arial Black', sans-serif; font-weight: 400; letter-spacing: .02em; }
+.font-alfa strong { font-family: 'Arial Black', Impact, sans-serif; font-weight: 900; letter-spacing: -.02em; }
+.font-cinzel strong { font-family: Garamond, Georgia, serif; font-weight: 700; letter-spacing: .08em; }
 
 /* Hours / footer */
 .hours-section { padding: 20px var(--content-gutter) 90px; }
