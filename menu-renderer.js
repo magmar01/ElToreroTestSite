@@ -15,6 +15,12 @@
       item.classList.add('menu-item--long');
     }
 
+    // Pitcher margaritas need the same full-width desktop separator layout
+    // even when their name falls below the long-name threshold.
+    if (itemData.name.toUpperCase().includes('PITCHER')) {
+      item.classList.add('menu-item--pitcher');
+    }
+
     item.append(createTextElement('span', 'menu-name', itemData.name));
     item.append(createTextElement('span', 'menu-price', itemData.price));
 
