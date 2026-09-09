@@ -40,6 +40,15 @@
   nav.addEventListener('click', event => {
     const link = event.target.closest('a');
     if (!link) return;
+
+    // Menu category links scroll to the section without adding a hash to the URL.
+    if (link.classList.contains('menu-category-link')) {
+      event.preventDefault();
+      const targetId = link.getAttribute('href')?.slice(1);
+      const target = targetId ? document.getElementById(targetId) : null;
+      target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     setOpen(false);
   });
 
