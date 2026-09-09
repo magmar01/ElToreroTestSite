@@ -55,18 +55,17 @@
     columns.forEach(column => {
       column.className = 'menu-column';
       column.dataset.menuColumn = 'desktop';
+      target.append(column);
     });
 
-    // Put sections into the shorter column as we go. This balances the actual
-    // rendered section heights instead of splitting the menu at a fixed index.
-    const heights = [0, 0];
+    // The columns are attached to the grid before measuring so every section
+    // is measured at its real desktop column width. Then pack each section
+    // into the currently shorter column for a balanced two-column layout.
     sections.forEach(section => {
+      const heights = columns.map(column => column.getBoundingClientRect().height);
       const columnIndex = heights[0] <= heights[1] ? 0 : 1;
       columns[columnIndex].append(section);
-      heights[columnIndex] += section.getBoundingClientRect().height;
     });
-
-    columns.forEach(column => target.append(column));
   };
 
   const renderMobileSequential = (target, sections) => {
@@ -98,8 +97,7 @@
     const target = document.querySelector('[data-menu]');
     if (!target || typeof MENU === 'undefined') return;
 
-    // Rebuild only when crossing the desktop/mobile breakpoint so normal
-    // desktop resizing does not disturb the current section arrangement.
+    // Rebuild only when crossing the desktop/mobile breakpoint.
     const desktop = window.matchMedia('(min-width: 901px)').matches;
     const current = target.querySelector('.menu-column')?.dataset.menuColumn;
     const expected = desktop ? 'desktop' : 'mobile';
