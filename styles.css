@@ -1,0 +1,25 @@
+/* Clean responsive stylesheet for the El Torero test rebuild. */
+:root{--red:#9b111e;--ink:#222;--paper:#fff;--max:1200px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+.header{position:relative;overflow:hidden;background-position:center top;background-repeat:no-repeat;background-size:cover}
+.header:after{content:"";position:absolute;inset:0;background:#808080;opacity:.25;pointer-events:none}
+.nav-box{position:absolute;z-index:20}
+.menu{position:absolute;z-index:19}
+main{width:min(100% - 24px,var(--max));margin:auto}
+.menu-section{width:100%;}
+.menu-section h1,.menu-section h2{margin:0 0 .45rem;font-weight:700}
+.menu-section h1{font-size:clamp(1.4rem,2.5vw,2rem);text-align:center}
+.menu-section h2{font-size:clamp(1rem,1.7vw,1.35rem)}
+ul.leaders{list-style:none;padding:0;margin:.15rem 0 1rem}
+ul.leaders li{display:grid;grid-template-columns:minmax(0,1fr) minmax(18px,1fr) max-content;align-items:baseline;gap:.2rem;margin:0;padding:.16rem 0;min-width:0}
+ul.leaders li:before{content:"";grid-column:2;border-bottom:2px dotted #222;height:0;align-self:center}
+ul.leaders .name{grid-column:1;font-weight:550;min-width:0;background:#fff;z-index:1}
+ul.leaders .price{grid-column:3;font-weight:600;white-space:nowrap;text-align:right;background:#fff;z-index:1}
+ul.leaders .desc{grid-column:1 / -1;font-size:.86em;line-height:1.2}
+.columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem}
+@media(max-width:900px){.header{height:clamp(330px,96vw,460px);background-size:contain}.nav-box{position:fixed;left:12px;top:12px}.menu{position:fixed;left:12px;top:70px;width:min(292px,calc(100vw - 24px))}.columns{grid-template-columns:1fr}.menu-section{overflow:visible}}
+@media(min-width:901px){.menu-section ul.leaders li{width:100%}}
