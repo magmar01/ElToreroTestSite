@@ -53,11 +53,21 @@ a { color: inherit; }
 .menu-note { margin: -8px 0 10px; font-family: 'Josefin Sans', Arial, sans-serif; font-size: clamp(.72rem, .82vw, .9rem); font-weight: 700; line-height: 1.28; text-align: center; }
 .menu-list { list-style: none; margin: 0; padding: 0; }
 .menu-item { display: grid; grid-template-columns: minmax(0, auto) minmax(20px, 1fr) max-content; grid-template-rows: auto auto; align-items: baseline; width: 100%; min-width: 0; margin: 0; padding: 8px 0 15px; break-inside: avoid; }
-.menu-item::before { content: ''; grid-column: 2; grid-row: 1; align-self: center; margin: 0 8px; border-bottom: 2px dotted #222; }
+.menu-item::before { content: ''; grid-column: 2; grid-row: 1; align-self: center; margin: 0 4px; border-bottom: 2px dotted #222; }
 .menu-name, .menu-price { background: var(--color-white); font-family: 'Josefin Sans', Arial, sans-serif; font-size: clamp(.86rem, 1vw, 1.08rem); font-weight: 700; line-height: 1.2; }
-.menu-name { grid-column: 1; grid-row: 1; min-width: 0; padding-right: 4px; overflow-wrap: anywhere; }
-.menu-price { grid-column: 3; grid-row: 1; padding-left: 4px; white-space: nowrap; }
+.menu-name { grid-column: 1; grid-row: 1; min-width: 0; padding-right: 2px; overflow-wrap: anywhere; }
+.menu-price { grid-column: 3; grid-row: 1; padding-left: 2px; white-space: nowrap; }
 .menu-desc { grid-column: 1 / -1; grid-row: 2; display: block; width: 100%; margin-top: 7px; padding-left: 2px; color: #444; font-family: 'Josefin Sans', Arial, sans-serif; font-size: clamp(.68rem, .78vw, .86rem); font-weight: 400; line-height: 1.42; overflow-wrap: break-word; }
+
+/* Temporary font comparison */
+.menu-font-comparison { width: min(900px, 100%); margin: 0 auto 34px; padding: 14px 16px; border: 1px dashed #bbb; background: #fafafa; }
+.font-option { display: flex; align-items: baseline; justify-content: center; gap: 18px; padding: 8px 0; color: var(--color-red); }
+.font-option span { width: 90px; color: #666; font-family: 'Josefin Sans', sans-serif; font-size: .72rem; font-weight: 600; letter-spacing: .06em; }
+.font-option strong { font-size: 2rem; font-weight: 600; line-height: 1; }
+.font-bree strong { font-family: 'Bree Serif', serif; }
+.font-rye strong { font-family: 'Rye', serif; }
+.font-alfa strong { font-family: 'Alfa Slab One', serif; }
+.font-cinzel strong { font-family: 'Cinzel', serif; letter-spacing: .04em; }
 
 /* Hours / footer */
 .hours-section { padding: 20px var(--content-gutter) 90px; }
@@ -102,6 +112,8 @@ a { color: inherit; }
   .menu-item { grid-template-columns: minmax(0, auto) minmax(12px, 1fr) max-content; padding: 7px 0 12px; }
   .menu-name, .menu-price { font-size: clamp(.9rem, 3.5vw, 1.05rem); }
   .menu-desc, .menu-note { font-size: clamp(.74rem, 2.6vw, .9rem); }
+  .font-option strong { font-size: 1.75rem; }
+  .menu-font-comparison { margin-bottom: 24px; }
   .hours-section { padding: 26px 5% 50px; }
   .site-footer { padding: 40px 5% 20px; }
 }
@@ -113,6 +125,9 @@ a { color: inherit; }
   .menu-column h2 { font-size: 1.7rem; }
   .menu-name, .menu-price { font-size: 1rem; }
   .menu-desc, .menu-note { font-size: .84rem; }
+  .font-option { gap: 10px; }
+  .font-option span { width: 72px; font-size: .65rem; }
+  .font-option strong { font-size: 1.55rem; }
 }
 @media (max-width: 420px) {
   .site-header { height: 330px; }
@@ -123,6 +138,7 @@ a { color: inherit; }
   .menu-column h2 { font-size: 1.55rem; }
   .menu-name, .menu-price { font-size: .94rem; }
   .menu-desc, .menu-note { font-size: .78rem; }
+  .font-option strong { font-size: 1.35rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
