@@ -64,14 +64,44 @@
       target.append(column);
     });
 
-    // The columns are attached to the grid before measuring so every section
-    // is measured at its real desktop column width. Then pack each section
-    // into the currently shorter column for a balanced two-column layout.
-    sections.forEach(section => {
-      const heights = columns.map(column => column.getBoundingClientRect().height);
-      const columnIndex = heights[0] <= heights[1] ? 0 : 1;
-      columns[columnIndex].append(section);
+    // First measure every section at the real desktop column width. Section
+    // heights are independent, so we can then find a near-optimal partition
+    // instead of greedily filling the currently shorter column. This greatly
+    // reduces the empty area at the bottom of one column.
+    sections.forEach(section => columns[0].append(section));
+    const heights = sections.map(section => section.getBoundingClientRect().height);
+    const total = heights.reduce((sum, height) => sum + height, 0);
+    const targetHeight = total / 2;
+
+    // Dynamic programming finds the subset whose total height is closest to
+    // half of the menu. The original section order is retained inside each
+    // resulting column, and this is desktop-only; mobile remains sequential.
+    const reachable = new Map([[0, []]]);
+    sections.forEach((section, index) => {
+      const height = heights[index];
+      const entries = Array.from(reachable.entries());
+      entries.forEach(([sum, indexes]) => {
+        const nextSum = sum + height;
+        if (nextSum <= targetHeight && !reachable.has(nextSum)) {
+          reachable.set(nextSum, [...indexes, index]);
+        }
+      });
     });
+
+    let bestSum = 0;
+    reachable.forEach((indexes, sum) => {
+      if (sum > bestSum) bestSum = sum;
+    });
+
+    const firstColumnIndexes = new Set(reachable.get(bestSum) || []);
+    const firstColumn = [];
+    const secondColumn = [];
+    sections.forEach((section, index) => {
+      (firstColumnIndexes.has(index) ? firstColumn : secondColumn).push(section);
+    });
+
+    columns[0].replaceChildren(...firstColumn);
+    columns[1].replaceChildren(...secondColumn);
   };
 
   const renderMobileSequential = (target, sections) => {
