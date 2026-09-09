@@ -11,15 +11,11 @@
     const item = document.createElement('li');
     item.className = 'menu-item';
 
-    const main = document.createElement('div');
-    main.className = 'menu-main';
+    if (itemData.name.length >= 30) {
+      item.classList.add('menu-item--long');
+    }
 
-    const name = createTextElement('span', 'menu-name', itemData.name);
-    const dots = document.createElement('span');
-    dots.className = 'menu-dots';
-
-    main.append(name, dots);
-    item.append(main);
+    item.append(createTextElement('span', 'menu-name', itemData.name));
     item.append(createTextElement('span', 'menu-price', itemData.price));
 
     if (itemData.description) {
