@@ -4,6 +4,7 @@
   const nav = document.querySelector('#site-nav');
   const close = document.querySelector('.menu-close');
   const menuContainer = document.querySelector('[data-menu]');
+  const menuTrigger = document.querySelector('[data-menu-trigger]');
   if (!toggle || !nav) return;
 
   const firstLink = nav.querySelector('a');
@@ -27,10 +28,17 @@
   toggle.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
   close?.addEventListener('click', () => setOpen(false));
 
+  menuTrigger?.addEventListener('click', () => {
+    const expanded = nav.classList.toggle('menu-expanded');
+    menuTrigger.setAttribute('aria-expanded', String(expanded));
+  });
+
   nav.addEventListener('click', event => {
     const link = event.target.closest('a');
     if (!link) return;
     setOpen(false);
+    nav.classList.remove('menu-expanded');
+    menuTrigger?.setAttribute('aria-expanded', 'false');
   });
 
   document.addEventListener('click', event => {
@@ -46,28 +54,24 @@
   });
 
   // Build the Menu category list from the same MENU data used to render the page.
-  // This keeps navigation automatically in sync when menu sections are added/renamed.
+  // This keeps navigation automatically in sync when menu sections are added or renamed.
   const buildMenuCategoryLinks = () => {
-    if (!menuContainer || !Array.isArray(window.MENU)) return;
+    if (!menuContainer || !Array.isArray(window.MENU) || !menuTrigger) return;
 
     const menuList = document.createElement('div');
     menuList.className = 'menu-category-list';
 
     window.MENU.forEach((section, index) => {
-      const id = `menu-section-${index + 1}`;
       const link = document.createElement('a');
-      link.href = `#${id}`;
+      link.href = `#menu-section-${index + 1}`;
       link.textContent = section.title;
       link.className = 'menu-category-link';
       menuList.append(link);
     });
 
-    const menuTrigger = nav.querySelector('[data-menu-trigger]');
-    if (menuTrigger) menuTrigger.insertAdjacentElement('afterend', menuList);
+    menuTrigger.insertAdjacentElement('afterend', menuList);
   };
 
-  // MENU is a top-level const in menu.js, so expose it to this navigation script.
-  // menu.js loads before site.js.
   if (typeof MENU !== 'undefined') window.MENU = MENU;
   buildMenuCategoryLinks();
 
