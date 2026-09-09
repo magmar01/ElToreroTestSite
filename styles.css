@@ -61,10 +61,18 @@ a { color: inherit; }
 .font-rye strong { font-family: 'Rye', Impact, 'Arial Black', sans-serif; font-weight: 400; letter-spacing: .02em; }
 .font-alfa strong { font-family: 'Alfa Slab One', 'Arial Black', Impact, sans-serif; font-weight: 400; letter-spacing: -.02em; }
 .font-cinzel strong { font-family: 'Cinzel', Garamond, Georgia, serif; font-weight: 700; letter-spacing: .08em; }
-.font-lobster strong { font-family: 'Lobster', 'Brush Script MT', cursive; font-weight: 400; letter-spacing: .01em; }
+.font-lobster strong { font-family: 'Lobster', 'Brush Script MT', cursive; font-weight: 400; }
 .font-oswald strong { font-family: 'Oswald', Impact, sans-serif; font-weight: 700; letter-spacing: .04em; }
-.font-dmserif strong { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; letter-spacing: .01em; }
+.font-dmserif strong { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; }
 .font-cinzel-light strong { font-family: 'Cinzel', Garamond, Georgia, serif; font-weight: 600; letter-spacing: .02em; transform: scaleX(.92); display: inline-block; }
+.font-abril strong { font-family: 'Abril Fatface', Georgia, serif; font-weight: 400; }
+.font-bungee strong { font-family: 'Bungee', 'Arial Black', sans-serif; font-weight: 400; letter-spacing: .01em; }
+.font-pacifico strong { font-family: 'Pacifico', 'Brush Script MT', cursive; font-weight: 400; }
+.font-satisfy strong { font-family: 'Satisfy', 'Brush Script MT', cursive; font-weight: 400; }
+.font-merriweather strong { font-family: 'Merriweather', Georgia, serif; font-weight: 900; }
+.font-arialblack strong { font-family: 'Arial Black', Arial, sans-serif; font-weight: 900; letter-spacing: -.04em; }
+.font-impact strong { font-family: Impact, 'Arial Narrow', sans-serif; font-weight: 400; letter-spacing: .015em; }
+.font-times strong { font-family: 'Times New Roman', Times, serif; font-weight: 700; }
 .hours-section { padding: 20px var(--content-gutter) 90px; }
 .hours-section > h1 { font-size: clamp(3.5rem, 6vw, 6rem); }
 .hours-section .menu-line { margin-bottom: 28px; }
