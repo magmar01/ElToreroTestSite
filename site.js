@@ -40,6 +40,20 @@
   nav.addEventListener('click', event => {
     const link = event.target.closest('a');
     if (!link) return;
+
+    // Menu category links scroll to their section without adding a hash
+    // fragment to the GitHub Pages URL.
+    if (link.classList.contains('menu-category-link')) {
+      event.preventDefault();
+      const target = document.querySelector(link.hash);
+      setOpen(false);
+      if (target) {
+        requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      }
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+      return;
+    }
+
     setOpen(false);
   });
 
