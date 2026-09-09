@@ -47,12 +47,12 @@ a { color: inherit; }
 .menu-column h2::after { content: ''; display: block; width: 78%; height: 2px; margin: 10px auto 0; border-radius: 2px; background: var(--color-black); }
 .menu-note { margin: -8px 0 10px; font-family: 'Josefin Sans', Arial, sans-serif; font-size: clamp(.72rem, .82vw, .9rem); font-weight: 700; line-height: 1.28; text-align: center; }
 .menu-list { list-style: none; margin: 0; padding: 0; }
-.menu-item { display: grid; grid-template-columns: minmax(0, auto) minmax(20px, 1fr) max-content; grid-template-rows: auto auto; align-items: baseline; width: 100%; min-width: 0; margin: 0; padding: 8px 0 12px; break-inside: avoid; }
+.menu-item { display: grid; grid-template-columns: minmax(0, auto) minmax(20px, 1fr) max-content; grid-template-rows: auto auto; align-items: baseline; width: 100%; min-width: 0; margin: 0; padding: 8px 0 15px; break-inside: avoid; }
 .menu-item::before { content: ''; grid-column: 2; grid-row: 1; align-self: center; margin: 0 8px; border-bottom: 2px dotted #222; }
 .menu-name, .menu-price { background: var(--color-white); font-family: 'Josefin Sans', Arial, sans-serif; font-size: clamp(.86rem, 1vw, 1.08rem); font-weight: 700; line-height: 1.2; }
 .menu-name { grid-column: 1; grid-row: 1; min-width: 0; padding-right: 4px; overflow-wrap: anywhere; }
 .menu-price { grid-column: 3; grid-row: 1; padding-left: 4px; white-space: nowrap; }
-.menu-desc { grid-column: 1 / -1; grid-row: 2; display: block; width: 100%; margin-top: 4px; font-family: 'Josefin Sans', Arial, sans-serif; font-size: clamp(.72rem, .82vw, .9rem); line-height: 1.28; overflow-wrap: break-word; }
+.menu-desc { grid-column: 1 / -1; grid-row: 2; display: block; width: 100%; margin-top: 7px; padding-left: 2px; color: #444; font-family: 'Josefin Sans', Arial, sans-serif; font-size: clamp(.68rem, .78vw, .86rem); font-weight: 400; line-height: 1.42; overflow-wrap: break-word; }
 
 /* Hours / footer */
 .hours-section { padding: 20px var(--content-gutter) 90px; }
@@ -93,9 +93,9 @@ a { color: inherit; }
   .menu-column h2 { margin: 18px 0 16px; padding-bottom: 6px; font-size: clamp(1.55rem, 5vw, 2rem); }
   .menu-column h2::after { width: 78%; margin-top: 8px; }
   .menu-note { margin-top: -4px; }
-  .menu-item { grid-template-columns: minmax(0, 1fr) minmax(12px, 1fr) max-content; padding: 7px 0 10px; }
+  .menu-item { grid-template-columns: minmax(0, 1fr) minmax(12px, 1fr) max-content; padding: 7px 0 12px; }
   .menu-name, .menu-price { font-size: clamp(.9rem, 3.5vw, 1.05rem); }
-  .menu-desc, .menu-note { font-size: clamp(.78rem, 2.8vw, .95rem); }
+  .menu-desc, .menu-note { font-size: clamp(.74rem, 2.6vw, .9rem); }
   .hours-section { padding: 26px 5% 50px; }
   .site-footer { padding: 40px 5% 20px; }
 }
@@ -104,7 +104,7 @@ a { color: inherit; }
   .menu-section > h1 { font-size: 3rem; }
   .menu-column h2 { font-size: 1.7rem; }
   .menu-name, .menu-price { font-size: 1rem; }
-  .menu-desc, .menu-note { font-size: .88rem; }
+  .menu-desc, .menu-note { font-size: .84rem; }
 }
 @media (max-width: 420px) {
   .site-header { height: 330px; }
@@ -112,7 +112,7 @@ a { color: inherit; }
   .menu-section > h1 { font-size: 2.8rem; }
   .menu-column h2 { font-size: 1.55rem; }
   .menu-name, .menu-price { font-size: .94rem; }
-  .menu-desc, .menu-note { font-size: .82rem; }
+  .menu-desc, .menu-note { font-size: .78rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
