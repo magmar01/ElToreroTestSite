@@ -3,6 +3,7 @@
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('#site-nav');
   const close = document.querySelector('.menu-close');
+  const menuContainer = document.querySelector('[data-menu]');
   if (!toggle || !nav) return;
 
   const firstLink = nav.querySelector('a');
@@ -27,7 +28,9 @@
   close?.addEventListener('click', () => setOpen(false));
 
   nav.addEventListener('click', event => {
-    if (event.target.closest('a')) setOpen(false);
+    const link = event.target.closest('a');
+    if (!link) return;
+    setOpen(false);
   });
 
   document.addEventListener('click', event => {
@@ -41,6 +44,32 @@
       setOpen(false);
     }
   });
+
+  // Build the Menu category list from the same MENU data used to render the page.
+  // This keeps navigation automatically in sync when menu sections are added/renamed.
+  const buildMenuCategoryLinks = () => {
+    if (!menuContainer || !Array.isArray(window.MENU)) return;
+
+    const menuList = document.createElement('div');
+    menuList.className = 'menu-category-list';
+
+    window.MENU.forEach((section, index) => {
+      const id = `menu-section-${index + 1}`;
+      const link = document.createElement('a');
+      link.href = `#${id}`;
+      link.textContent = section.title;
+      link.className = 'menu-category-link';
+      menuList.append(link);
+    });
+
+    const menuTrigger = nav.querySelector('[data-menu-trigger]');
+    if (menuTrigger) menuTrigger.insertAdjacentElement('afterend', menuList);
+  };
+
+  // MENU is a top-level const in menu.js, so expose it to this navigation script.
+  // menu.js loads before site.js.
+  if (typeof MENU !== 'undefined') window.MENU = MENU;
+  buildMenuCategoryLinks();
 
   const structuredData = {
     '@context': 'https://schema.org',
