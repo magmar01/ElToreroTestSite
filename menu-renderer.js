@@ -25,12 +25,14 @@
     return item;
   };
 
+  const isSpecialOrders = (sectionData) => sectionData.title === 'El Torero Special Orders';
+
   const createMenuSection = (sectionData, index) => {
     const section = document.createElement('section');
     section.className = 'menu-block';
     section.id = `menu-section-${index + 1}`;
 
-    if (sectionData.title === 'Special Orders') {
+    if (isSpecialOrders(sectionData)) {
       section.classList.add('menu-block--special-orders');
     }
 
@@ -61,9 +63,9 @@
     MENU.forEach((sectionData, index) => {
       const section = createMenuSection(sectionData, index);
 
-      // Keep Special Orders as the final block in the right column on desktop.
-      // On mobile the existing one-column flow remains intact.
-      if (sectionData.title === 'Special Orders') {
+      // Keep El Torero Special Orders out of the normal index split.
+      // It belongs at the bottom of the right-hand column on desktop.
+      if (isSpecialOrders(sectionData)) {
         specialOrders = section;
         return;
       }
