@@ -9,7 +9,6 @@
   --menu-gap: clamp(28px, 4vw, 48px);
   --section-max: 1500px;
 }
-
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 24px; }
 body { margin: 0; background: var(--color-white); color: var(--color-black); overflow-x: hidden; }
@@ -17,8 +16,6 @@ button, a { font: inherit; }
 a { color: inherit; }
 .skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; padding: 8px 12px; background: var(--color-white); color: var(--color-black); transform: translateY(-150%); transition: transform .15s ease; }
 .skip-link:focus { transform: translateY(0); }
-
-/* Header / navigation */
 .site-header { position: relative; height: 70vh; min-height: 460px; background: url('https://raw.githubusercontent.com/magmar01/ElToreroSite/master/img/eltorero.jpg') center center / contain no-repeat; }
 .site-header::after { content: ''; position: absolute; inset: 0; background: #808080; opacity: .25; pointer-events: none; }
 .navigation { position: relative; z-index: 20; }
@@ -38,8 +35,6 @@ a { color: inherit; }
 .menu-category-link:hover, .menu-category-link:focus-visible { background: #f5f5f5 !important; }
 .menu-close { position: absolute; top: -38px; right: -34px; padding: 0; border: 0; background: transparent; color: var(--color-white); font-size: 2rem; cursor: pointer; }
 .hero-caption { position: absolute; left: 0; right: 0; bottom: 28px; z-index: 2; padding: 0 16px; text-align: center; font-family: 'Staatliches', sans-serif; font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 400; letter-spacing: 10px; }
-
-/* Menu */
 .menu-section, .hours-section { width: 100%; }
 .menu-section { width: min(100%, var(--section-max)); margin: 0 auto; padding: 0 var(--content-gutter) 90px; }
 .menu-section > h1, .hours-section > h1 { margin: 0; text-align: center; font-family: 'Staatliches', sans-serif; font-weight: 400; letter-spacing: .06em; }
@@ -58,22 +53,18 @@ a { color: inherit; }
 .menu-name { grid-column: 1; grid-row: 1; min-width: 0; padding-right: 2px; overflow-wrap: anywhere; }
 .menu-price { grid-column: 3; grid-row: 1; padding-left: 2px; white-space: nowrap; }
 .menu-desc { grid-column: 1 / -1; grid-row: 2; display: block; width: 100%; margin-top: 7px; padding-left: 2px; color: #444; font-family: 'Josefin Sans', Arial, sans-serif; font-size: clamp(.68rem, .78vw, .86rem); font-weight: 400; line-height: 1.42; overflow-wrap: break-word; }
-
-/* Temporary font comparison */
 .menu-font-comparison { width: min(900px, 100%); margin: 0 auto 34px; padding: 14px 16px; border: 1px dashed #bbb; background: #fafafa; }
 .font-option { display: flex; align-items: baseline; justify-content: center; gap: 18px; padding: 8px 0; color: var(--color-red); }
 .font-option span { width: 90px; color: #666; font-family: 'Josefin Sans', sans-serif; font-size: .72rem; font-weight: 600; letter-spacing: .06em; }
-.font-option strong { font-size: 2rem; font-weight: 600; line-height: 1; }
+.font-option strong { font-size: 2rem; line-height: 1; }
 .font-bree strong { font-family: 'Bree Serif', Georgia, serif; font-weight: 700; }
 .font-rye strong { font-family: 'Rye', Impact, 'Arial Black', sans-serif; font-weight: 400; letter-spacing: .02em; }
-.font-alfa strong { font-family: 'Alfa Slab One', 'Arial Black', Impact, sans-serif; font-weight: 900; letter-spacing: -.02em; }
+.font-alfa strong { font-family: 'Alfa Slab One', 'Arial Black', Impact, sans-serif; font-weight: 400; letter-spacing: -.02em; }
 .font-cinzel strong { font-family: 'Cinzel', Garamond, Georgia, serif; font-weight: 700; letter-spacing: .08em; }
-.font-playfair strong { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
-.font-cormorant strong { font-family: 'Cormorant Garamond', Garamond, Georgia, serif; font-weight: 700; }
-.font-lora strong { font-family: 'Lora', Georgia, serif; font-weight: 700; }
-.font-georgia strong { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; letter-spacing: .02em; }
-
-/* Hours / footer */
+.font-lobster strong { font-family: 'Lobster', 'Brush Script MT', cursive; font-weight: 400; letter-spacing: .01em; }
+.font-oswald strong { font-family: 'Oswald', Impact, sans-serif; font-weight: 700; letter-spacing: .04em; }
+.font-dmserif strong { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; letter-spacing: .01em; }
+.font-cinzel-light strong { font-family: 'Cinzel', Garamond, Georgia, serif; font-weight: 600; letter-spacing: .02em; transform: scaleX(.92); display: inline-block; }
 .hours-section { padding: 20px var(--content-gutter) 90px; }
 .hours-section > h1 { font-size: clamp(3.5rem, 6vw, 6rem); }
 .hours-section .menu-line { margin-bottom: 28px; }
@@ -88,8 +79,6 @@ a { color: inherit; }
 .map-wrap { width: min(100%, 700px); aspect-ratio: 4 / 3; margin: 18px auto 0; overflow: hidden; border-radius: 4px; }
 .map-wrap iframe { width: 100%; height: 100%; border: 0; }
 .copyright { margin: 35px 0 0; font-size: .85rem; }
-
-/* Responsive */
 @media (max-width: 1100px) {
   .menu-section { padding-left: 4%; padding-right: 4%; }
   .menu-grid { gap: 30px; }
