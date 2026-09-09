@@ -1,68 +1,61 @@
-/*
- * EL TORERO MENU RENDERER
- *
- * Turns the plain MENU data into semantic DOM nodes.
- * Menu content stays separate from presentation and HTML structure.
- */
-function createTextElement(tagName, className, text) {
-  const element = document.createElement(tagName);
-  if (className) element.className = className;
-  element.textContent = text ?? '';
-  return element;
-}
+/* Render menu data into accessible HTML. */
+(() => {
+  const createTextElement = (tagName, className, text) => {
+    const element = document.createElement(tagName);
+    if (className) element.className = className;
+    element.textContent = text;
+    return element;
+  };
 
-function createMenuItem(itemData) {
-  const item = document.createElement('li');
-  item.className = 'menu-item';
+  const createMenuItem = (itemData) => {
+    const item = document.createElement('li');
+    item.className = 'menu-item';
 
-  const name = createTextElement('span', 'menu-name', itemData.name);
-  const price = createTextElement('span', 'menu-price', itemData.price);
+    item.append(createTextElement('span', 'menu-name', itemData.name));
+    item.append(createTextElement('span', 'menu-price', itemData.price));
 
-  item.append(name, price);
+    if (itemData.description) {
+      item.append(createTextElement('small', 'menu-desc', itemData.description));
+    }
 
-  if (itemData.description) {
-    item.append(createTextElement('small', 'menu-desc', itemData.description));
-  }
+    return item;
+  };
 
-  return item;
-}
+  const createMenuSection = (sectionData, index) => {
+    const section = document.createElement('section');
+    section.className = 'menu-block';
+    section.id = `menu-section-${index + 1}`;
 
-function createMenuSection(sectionData) {
-  const section = document.createElement('section');
-  section.className = 'menu-block';
+    section.append(createTextElement('h2', 'menu-heading', sectionData.title));
 
-  const title = createTextElement('h2', 'menu-heading', sectionData.title);
-  section.append(title);
+    if (sectionData.note) {
+      section.append(createTextElement('p', 'menu-note', sectionData.note));
+    }
 
-  if (sectionData.note) {
-    section.append(createTextElement('p', 'menu-note', sectionData.note));
-  }
+    const list = document.createElement('ul');
+    list.className = 'menu-list';
+    sectionData.items.forEach(itemData => list.append(createMenuItem(itemData)));
+    section.append(list);
 
-  const list = document.createElement('ul');
-  list.className = 'menu-list';
-  sectionData.items.forEach(itemData => list.append(createMenuItem(itemData)));
-  section.append(list);
+    return section;
+  };
 
-  return section;
-}
+  const renderMenu = () => {
+    const target = document.querySelector('[data-menu]');
+    if (!target || typeof MENU === 'undefined') return;
 
-function renderMenu() {
-  const root = document.querySelector('[data-menu]');
-  if (!root || !Array.isArray(MENU)) return;
+    target.replaceChildren();
+    const columns = [document.createElement('div'), document.createElement('div')];
+    columns.forEach(column => column.className = 'menu-column');
+    const split = Math.ceil(MENU.length / 2);
 
-  root.replaceChildren();
+    MENU.forEach((sectionData, index) => {
+      const columnIndex = index < split ? 0 : 1;
+      columns[columnIndex].append(createMenuSection(sectionData, index));
+    });
 
-  const columns = [document.createElement('div'), document.createElement('div')];
-  columns.forEach(column => {
-    column.className = 'menu-column';
-    root.append(column);
-  });
+    columns.forEach(column => target.append(column));
+  };
 
-  const splitIndex = Math.ceil(MENU.length / 2);
-  MENU.forEach((sectionData, index) => {
-    const column = index < splitIndex ? columns[0] : columns[1];
-    column.append(createMenuSection(sectionData));
-  });
-}
-
-document.addEventListener('DOMContentLoaded', renderMenu);
+  window.addEventListener('DOMContentLoaded', renderMenu);
+})();
