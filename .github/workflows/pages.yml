@@ -25,6 +25,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Copy hero image into staging site
+        run: |
+          mkdir -p img
+          curl -fsSL "https://raw.githubusercontent.com/magmar01/ElToreroSite/c14c521864d43c419ecc7ffc6a5668521e09d7ce/img/eltorero.jpg" -o img/eltorero.jpg
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
