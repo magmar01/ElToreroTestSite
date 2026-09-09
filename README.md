@@ -1,5 +1,7 @@
 # El Torero Test Site
 
-Development/staging rebuild of the El Torero Mexican Restaurant website.
+This repository is the permanent test/staging rebuild for El Torero Mexican Restaurant.
 
-This repository is intentionally separate from production so changes can be tested before promotion.
+## Branch
+
+`main` is the single working branch for this project. Make changes directly on `main`.
