@@ -50,36 +50,59 @@
     return section;
   };
 
+  const renderDesktopBalanced = (target, sections) => {
+    const columns = [document.createElement('div'), document.createElement('div')];
+    columns.forEach(column => {
+      column.className = 'menu-column';
+      column.dataset.menuColumn = 'desktop';
+    });
+
+    // Put sections into the shorter column as we go. This balances the actual
+    // rendered section heights instead of splitting the menu at a fixed index.
+    const heights = [0, 0];
+    sections.forEach(section => {
+      const columnIndex = heights[0] <= heights[1] ? 0 : 1;
+      columns[columnIndex].append(section);
+      heights[columnIndex] += section.getBoundingClientRect().height;
+    });
+
+    columns.forEach(column => target.append(column));
+  };
+
+  const renderMobileSequential = (target, sections) => {
+    const column = document.createElement('div');
+    column.className = 'menu-column';
+    column.dataset.menuColumn = 'mobile';
+    sections.forEach(section => column.append(section));
+    target.append(column);
+  };
+
   const renderMenu = () => {
     const target = document.querySelector('[data-menu]');
     if (!target || typeof MENU === 'undefined') return;
 
     target.replaceChildren();
-    const columns = [document.createElement('div'), document.createElement('div')];
-    columns.forEach(column => column.className = 'menu-column');
-    const split = Math.ceil(MENU.length / 2);
-    let specialOrders = null;
+    const sections = MENU.map((sectionData, index) => createMenuSection(sectionData, index));
 
-    MENU.forEach((sectionData, index) => {
-      const section = createMenuSection(sectionData, index);
-
-      // Keep El Torero Special Orders out of the normal index split.
-      // It belongs at the bottom of the right-hand column on desktop.
-      if (isSpecialOrders(sectionData)) {
-        specialOrders = section;
-        return;
-      }
-
-      const columnIndex = index < split ? 0 : 1;
-      columns[columnIndex].append(section);
-    });
-
-    if (specialOrders) {
-      columns[1].append(specialOrders);
+    if (window.matchMedia('(min-width: 901px)').matches) {
+      renderDesktopBalanced(target, sections);
+    } else {
+      renderMobileSequential(target, sections);
     }
 
-    columns.forEach(column => target.append(column));
+    target.dispatchEvent(new CustomEvent('menu-layout-updated'));
   };
 
   window.addEventListener('DOMContentLoaded', renderMenu);
+  window.addEventListener('resize', () => {
+    const target = document.querySelector('[data-menu]');
+    if (!target || typeof MENU === 'undefined') return;
+
+    // Rebuild only when crossing the desktop/mobile breakpoint so normal
+    // desktop resizing does not disturb the current section arrangement.
+    const desktop = window.matchMedia('(min-width: 901px)').matches;
+    const current = target.querySelector('.menu-column')?.dataset.menuColumn;
+    const expected = desktop ? 'desktop' : 'mobile';
+    if (current !== expected) renderMenu();
+  });
 })();
