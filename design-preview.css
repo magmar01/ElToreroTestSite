@@ -28,7 +28,7 @@
 @media(max-width:900px){
   .site-header{border-bottom-width:4px;background:radial-gradient(circle at 50% 40%,rgb(255 250 239 / 72%) 0,rgb(255 250 239 / 0) 38%),linear-gradient(180deg,#eadcc2 0%,#dfc69f 100%)}
   /* Mobile is restored to the exact logo sizing used before the enlargement experiment. */
-  .site-header::before{background-size:min(300px,76vw);background-position:center 39%;filter:brightness(1.75) contrast(2.25) saturate(1.15);mix-blend-mode:multiply}
+  .site-header::before{background-size:min(300px,76vw);background-position:center 39%;filter:brightness(1.75) contrast(2.25) saturate(1.15);mix-blend-mode:darken}
   .hero-caption{display:block;bottom:9px;padding:5px 8px 7px;font-size:clamp(1.35rem,6vw,2.15rem);letter-spacing:1px;text-shadow:1px 1px 0 #fffdf8,0 2px 3px rgb(0 0 0 / 14%)}
   .hero-caption::before,.hero-caption::after{width:24px;margin:0 7px 6px}
   .menu-section{padding-left:4%;padding-right:4%}
