@@ -8,7 +8,7 @@
 
 /* Temporary hero: warm parchment background with the cleaned transparent logo and restored caption. */
 .site-header{background:radial-gradient(circle at 50% 42%,rgb(255 250 239 / 72%) 0,rgb(255 250 239 / 0) 34%),linear-gradient(180deg,#eadcc2 0%,#dfc69f 100%);border-bottom:5px solid #8f1711;box-shadow:0 4px 18px rgb(0 0 0 / 12%)}
-/* Desktop: keep the logo only modestly larger than the original working size. */
+/* Desktop: modestly larger logo without changing the mobile size. */
 .site-header::before{content:'';position:absolute;inset:0;z-index:1;background:url('eltorero-logo-transparent.svg') center 40% / min(420px,36vw) auto no-repeat;pointer-events:none}
 .site-header::after{background:linear-gradient(to bottom,transparent 55%,rgb(95 56 28 / 10%) 100%);opacity:1}
 .hero-caption{display:block;bottom:18px;padding:8px 20px 10px;color:#8f1711;font-family:'Rye',serif;font-size:clamp(2rem,3.4vw,3.25rem);line-height:1;letter-spacing:clamp(2px,.3vw,5px);text-shadow:1px 1px 0 #fffdf8,0 2px 3px rgb(0 0 0 / 14%)}
@@ -28,8 +28,8 @@
 
 @media(max-width:900px){
   .site-header{border-bottom-width:4px;background:radial-gradient(circle at 50% 40%,rgb(255 250 239 / 72%) 0,rgb(255 250 239 / 0) 38%),linear-gradient(180deg,#eadcc2 0%,#dfc69f 100%)}
-  /* Mobile is intentionally unchanged because its current logo size is already working well. */
-  .site-header::before{background-size:min(330px,82vw);background-position:center 37%}
+  /* Restore the mobile logo size that was working before the enlargement. */
+  .site-header::before{background-size:min(300px,76vw);background-position:center 39%}
   .hero-caption{display:block;bottom:9px;padding:5px 8px 7px;font-size:clamp(1.35rem,6vw,2.15rem);letter-spacing:1px;text-shadow:1px 1px 0 #fffdf8,0 2px 3px rgb(0 0 0 / 14%)}
   .hero-caption::before,.hero-caption::after{width:24px;margin:0 7px 6px}
   .menu-section{padding-left:4%;padding-right:4%}
@@ -37,7 +37,7 @@
   .menu-block::before{inset:5px}
 }
 @media(max-width:420px){
-  .site-header::before{background-size:min(295px,84vw);background-position:center 37%}
+  .site-header::before{background-size:min(270px,78vw);background-position:center 39%}
   .hero-caption{font-size:1.35rem;letter-spacing:.5px}
   .hero-caption::before,.hero-caption::after{width:18px;margin-left:4px;margin-right:4px}
   .menu-block{padding-left:10px;padding-right:10px}
