@@ -133,7 +133,7 @@
       streetAddress: '3656 Satellite Boulevard',
       addressLocality: 'Duluth',
       addressRegion: 'GA',
-      postalCode: '30043',
+      postalCode: '30096',
       addressCountry: 'US'
     },
     openingHoursSpecification: [{
